@@ -266,7 +266,22 @@
     </section>
     <!-- Categories Section End -->
     <!-- Featured Section Begin -->
-@RenderBody()    <!-- Featured Section End -->
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Featured Product</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </section>
     <section class="from-blog spad">
         <div class="container">
             <div class="row">
@@ -397,6 +412,10 @@
         </div>
     </footer>
     <!-- Footer Section End -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
     <!-- Js Plugins -->
     <script src="~/LayoutOrgani/js/jquery-3.3.1.min.js"></script>
     <script src="~/LayoutOrgani/js/bootstrap.min.js"></script>

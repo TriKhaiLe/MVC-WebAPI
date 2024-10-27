@@ -4,16 +4,7 @@
     ViewData["Title"] = "Index";
     List<Catalog> listCatalog = ViewBag.listCatalog;
 }
-@section Css {
-    <link rel="stylesheet" href="~/LayoutOrgani/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="~/LayoutOrgani/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="~/LayoutOrgani/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="~/LayoutOrgani/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="~/LayoutOrgani/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="~/LayoutOrgani/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="~/LayoutOrgani/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="~/LayoutOrgani/css/style.css" type="text/css">
-}
+
 <div class="filter__item">
     <div class="row">
         <div class="col-lg-4 col-md-5">
@@ -35,14 +26,6 @@
 </div>
 
 @section Scripts {
-    <script src="~/LayoutOrgani/js/jquery-3.3.1.min.js"></script>
-    <script src="~/LayoutOrgani/js/bootstrap.min.js"></script>
-    <script src="~/LayoutOrgani/js/jquery.nice-select.min.js"></script>
-    <script src="~/LayoutOrgani/js/jquery-ui.min.js"></script>
-    <script src="~/LayoutOrgani/js/jquery.slicknav.js"></script>
-    <script src="~/LayoutOrgani/js/mixitup.min.js"></script>
-    <script src="~/LayoutOrgani/js/owl.carousel.min.js"></script>
-    <script src="~/LayoutOrgani/js/main.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -59,7 +42,7 @@
                 type: 'GET',
                 data: { iddm: selectedDMId },
                 success: function (data) {
-                    $("#iddanhsachsanpham_table").empty().append(data);
+                    $("#iddanhsachsanpham_table").empty().append(data); 
                 },
                 error: function (xhr, status, error) {
                     alert(xhr.responseText);
