@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MVC_WebAPI.Models;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace MVC_WebAPI.Controllers
 {
@@ -17,10 +18,25 @@ namespace MVC_WebAPI.Controllers
             _httpClient.BaseAddress = new Uri("https://localhost:7174/"); // Đặt Base URL của API
         }
 
+        public async Task<IActionResult> getListProduct(int iddm)
+        {
+            List<Product> products = await _httpClient.GetFromJsonAsync<List<Product>>("api/Products") ?? [];
+
+            if (iddm != -1)
+            {
+                products = products.Where(p => p.CatalogId == iddm).ToList();
+            }
+
+            return PartialView("_ListProduct", products);
+        }
+
         // GET: Products
         public async Task<IActionResult> Index()
         {
             var products = await _httpClient.GetFromJsonAsync<IEnumerable<Product>>("api/Products");
+            var listCatalog = await _httpClient.GetFromJsonAsync<IEnumerable<Catalog>>("api/Catalogs");
+            ViewBag.listCatalog = listCatalog;
+
             return View(products);
         }
 

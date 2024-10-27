@@ -2,58 +2,70 @@
 
 @{
     ViewData["Title"] = "Index";
+    List<Catalog> listCatalog = ViewBag.listCatalog;
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Catalog)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Picture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Catalog.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@section Css {
+    <link rel="stylesheet" href="~/LayoutOrgani/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/LayoutOrgani/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/LayoutOrgani/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/LayoutOrgani/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/LayoutOrgani/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/LayoutOrgani/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/LayoutOrgani/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/LayoutOrgani/css/style.css" type="text/css">
 }
-    </tbody>
-</table>
+<div class="filter__item">
+    <div class="row">
+        <div class="col-lg-4 col-md-5">
+            <div class="filter__sort">
+                <span>Sort By</span>
+                <select id="sltDanhMuc" style="display: none;">
+                    <option value="-1">Chọn danh mục</option>
+                    @foreach (var item in listCatalog)
+                    {
+                        <option value="@item.Id">@item.CatalogName</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div id="iddanhsachsanpham_selection" class="row">
+            <div id="iddanhsachsanpham_table"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/LayoutOrgani/js/jquery-3.3.1.min.js"></script>
+    <script src="~/LayoutOrgani/js/bootstrap.min.js"></script>
+    <script src="~/LayoutOrgani/js/jquery.nice-select.min.js"></script>
+    <script src="~/LayoutOrgani/js/jquery-ui.min.js"></script>
+    <script src="~/LayoutOrgani/js/jquery.slicknav.js"></script>
+    <script src="~/LayoutOrgani/js/mixitup.min.js"></script>
+    <script src="~/LayoutOrgani/js/owl.carousel.min.js"></script>
+    <script src="~/LayoutOrgani/js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            getSanPhamTable();
+        });
+        var selectedDMId = -1;
+        $("#sltDanhMuc").change(function () {
+            selectedDMId = $("#sltDanhMuc").val();
+            getSanPhamTable();
+        })
+        function getSanPhamTable() {
+            $.ajax({
+                url: "/Products/getListProduct",
+                type: 'GET',
+                data: { iddm: selectedDMId },
+                success: function (data) {
+                    $("#iddanhsachsanpham_table").empty().append(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+
+    </script>
+}

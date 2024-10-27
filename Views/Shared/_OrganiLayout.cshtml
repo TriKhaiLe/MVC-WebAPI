@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="~/LayoutOrgani/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="~/LayoutOrgani/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/LayoutOrgani/css/style.css" type="text/css">
+
+    @await RenderSectionAsync("Css", required: false);
 </head>
 
 <body>
@@ -405,8 +407,7 @@
     <script src="~/LayoutOrgani/js/owl.carousel.min.js"></script>
     <script src="~/LayoutOrgani/js/main.js"></script>
 
-
-
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>
